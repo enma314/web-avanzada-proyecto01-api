@@ -73,3 +73,16 @@ function getByPage(pageNumber, nPerPage) {
 };
 
 exports.getByPage = getByPage;
+
+function getByCategory(categoryName) {
+  return new Promise((fnResolve, fnReject) => {
+    Jobs.find({category: categoryName}, (objError, listJobs) => {
+      if(objError) {
+        return fnReject(objError);
+      }
+      return fnResolve(listJobs);
+    });
+  });
+};
+
+exports.getByCategory = getByCategory;
