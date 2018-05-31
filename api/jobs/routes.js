@@ -32,15 +32,24 @@ module.exports = function(app) {
     .delete((req,res) => {
       JobController.deleteById(req.params.id).then((strMessage) => {
         res.json(strMessage);
-      })
-    })
+      });
+    });
 
   app.route('/api/jobs/:pageNumber/:nPerPage')
     .get((req,res) => {
       JobController.getByPage(req.params.pageNumber, req.params.nPerPage).then((listJobs) => {
         res.json(listJobs);
-      })
-    })
+      });
+    });
+
+    app.route('/api/jobs/:category').get((req,res) => {
+      JobController.getByCategory(req.params.categorys).then((listJobs) => {
+        res.json(listJobs);
+      });
+    });
+
+    
+
 
 
 
