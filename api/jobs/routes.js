@@ -44,7 +44,7 @@ module.exports = function (app) {
 
   app.route('/api/jobs/:category')
     .get((req, res) => {
-      JobController.getByCategory(req.params.categorys).then((listJobs) => {
+      JobController.getByCategory(req.params.category).then((listJobs) => {
         res.json(listJobs);
       });
     });
