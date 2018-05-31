@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 
 let jobSchema = new Schema({
-  company:'String',
+  company: 'String',
   type: 'String',
   position: 'String',
   location: 'String',

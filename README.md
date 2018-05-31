@@ -12,6 +12,10 @@ Get all jobs
 
 https://web-project-01.herokuapp.com/api/jobs
 
+Get all jobs given the category
+
+https://web-project-01.herokuapp.com/api/jobs/:category
+
 https://web-project-01.herokuapp.com/api/jobs/:pageNumber/:nPerPage
 
 ### POST

@@ -1,5 +1,5 @@
 'use strict';
-module.exports = function(app) {
+module.exports = function (app) {
   const JobController = require('./controllers');
   // todoList Routes
 
@@ -22,40 +22,41 @@ module.exports = function(app) {
         req.body.applyGuide,
         req.body.email
       ).then((objJob) => {
-          res.json(objJob);
-        });
+        res.json(objJob);
+      });
     });
 
   app.route('/api/jobs/:id')
     // .get(JobController.get_job_by_id)
     // .put(JobController.update_job_by_id)
-    .delete((req,res) => {
+    .delete((req, res) => {
       JobController.deleteById(req.params.id).then((strMessage) => {
         res.json(strMessage);
       });
     });
 
   app.route('/api/jobs/:pageNumber/:nPerPage')
-    .get((req,res) => {
+    .get((req, res) => {
       JobController.getByPage(req.params.pageNumber, req.params.nPerPage).then((listJobs) => {
         res.json(listJobs);
       });
     });
 
-    app.route('/api/jobs/:category').get((req,res) => {
+  app.route('/api/jobs/:category')
+    .get((req, res) => {
       JobController.getByCategory(req.params.categorys).then((listJobs) => {
         res.json(listJobs);
       });
     });
 
-    
 
 
 
 
-      // app.get('/', (req, res) => {
-      //   res.send('Hello World');
-      // });
+
+  // app.get('/', (req, res) => {
+  //   res.send('Hello World');
+  // });
 
 
 

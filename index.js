@@ -19,7 +19,7 @@ const bodyParser = require('body-parser'); //CUANDO EL BODY NoEx
 // app.delete()
 
 //CONECTION TO MONGODB ONLINE
-const connectMongoOnline='mongodb://admin:web2018@ds119490.mlab.com:19490/webproject01';
+const connectMongoOnline = 'mongodb://admin:web2018@ds119490.mlab.com:19490/webproject01';
 mongoose.connect(connectMongoOnline);
 let db = mongoose.connection;
 

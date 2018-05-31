@@ -1,10 +1,10 @@
 'use strict';
-module.exports = function(app) {
+module.exports = function (app) {
   const UserController = require('./controllers');
   // todoList Routes
 
   app.route('/api/users')
-    .get((req,res) => {
+    .get((req, res) => {
       UserController.getAll().then((listUsers) => {
         res.json(listUsers);
       });
