@@ -26,7 +26,15 @@ module.exports = function (app) {
       });
     });
 
-  app.route('/api/jobs/:id')
+    app.route('/api/jobs/:category')
+    .get((req, res) => {
+      JobController.getByCategory(req.params.category).then((listJobs) => {
+        
+        res.json(listJobs);
+      });
+    });
+
+  app.route('/api/jobs/find/:id')
     .get((req, res) => {
       JobController.getById(req.params.id).then((objJob) => {
         res.json(objJob)
@@ -60,12 +68,7 @@ module.exports = function (app) {
       });
     });
 
-  app.route('/api/jobs/:category')
-    .get((req, res) => {
-      JobController.getByCategory(req.params.category).then((listJobs) => {
-        res.json(listJobs);
-      });
-    });
+  
 
 
 
