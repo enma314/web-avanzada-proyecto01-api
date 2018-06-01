@@ -30,10 +30,12 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 const jobsRoutes = require('./api/jobs/routes'); //IMPORT JOBS ROUTES
-const usersRoutes = require('./api/users/routes'); //IMPORT USERS ROUTES
+const usersRoutes = require('./api/users/routes'); //IMPORT USERS ROUTES 
+const categoriesRoutes = require('./api/categories/routes'); 
 
 jobsRoutes(app); //REGISTER ROUTE
 usersRoutes(app); //REGISTER ROUTE
+categoriesRoutes(app);
 
 // PORT
 const port = process.env.PORT || 3000;
