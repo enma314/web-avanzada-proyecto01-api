@@ -25,8 +25,36 @@ module.exports = function (app) {
       });
     })
 
+    app.route('/api/categories/createCategoryMobile')
+    .post((req,res) => {
+      const image = req.param('image');
+      console.log(image);
+      axios.post(`https://api.kairos.com/recognize`, {
+          "image": image,
+          "gallery_name": "MyGallery"
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'app_id': '9c24674f',
+                'app_key': '82119fc61ade019309693e68ca0e78e7'
+            }
+        })
+        .then((data) => {
+          console.log("ALL GOOD");
+          
+          console.log(data.data)
+          console.log(data.data.images[0].candidates)
+          res.send(data.data.images[0].candidates);
+        
+        }).catch((error) => {
+          console.log(JSON.stringify(error, null, 2))
+          console.log("RECOGNIZE ERROR!")
+        })      
+    });
+
   app.route('/api/categories/createCategory')
     .post((req,res) => {
+      console.log(req)
       CategoryController.create(
         req.files[0].path
       ).then((objCategory) => {

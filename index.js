@@ -14,6 +14,8 @@ const storage = multer.diskStorage({
     cb(null, file.originalname)
   }
 })
+
+
 const upload = multer({storage: storage});
 // app.get('/', (req, res) => {
 //   res.send('Hello World');
@@ -39,8 +41,8 @@ const options = {
 };
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }))
+app.use(bodyParser.json({limit: '50mb', extended: true}));
 
 // for parsing multipart/form-data
 //app.use(upload.array()); 
