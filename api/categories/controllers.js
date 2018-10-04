@@ -29,11 +29,11 @@ function getById(id) {
 
 exports.getById = getById;
 
-function create(name) {
+function create(image) {
   return new Promise((fnResolve, fnReject) => {
     console.log("Creating category...");
     const ObjectCategory = Object.assign({}, {
-      name: name
+      image: image
     });
     const newCategory = new Categories(ObjectCategory);
     newCategory.save(function (objError, objCategory) {

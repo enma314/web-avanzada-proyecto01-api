@@ -4,15 +4,9 @@ var Schema = mongoose.Schema;
 
 
 let jobSchema = new Schema({
-  company: 'String',
-  type: 'String',
-  position: 'String',
-  location: 'String',
-  category: 'String',
-  description: 'String',
-  applyGuide: 'String',
-  email: 'String'
-
+  name: 'String',
+  lastName: 'String',
+  image: 'String'
 });
 
 

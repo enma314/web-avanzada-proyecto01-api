@@ -29,18 +29,13 @@ function getById(id) {
 
 exports.getById = getById;
 
-function create(company, type, position, location, category, description, applyGuide, email) {
+function create(name, lastName, image) {
   return new Promise((fnResolve, fnReject) => {
     console.log("Creating job post...");
     const ObjectJob = Object.assign({}, {
-      company: company,
-      type: type,
-      position: position,
-      location: location,
-      category: category,
-      description: description,
-      applyGuide: applyGuide,
-      email: email
+      name: name,
+      lastName: lastName,
+      image: image
     });
     const newJob = new Jobs(ObjectJob); //CREATING JOB IN DATABASE
     newJob.save(function (objError, objJob) {
@@ -99,17 +94,12 @@ function getByCategory(categoryName) {
 
 exports.getByCategory = getByCategory;
 
-function updateById(id, company, type, position, location, category, description, applyGuide, email) {
+function updateById(id, name, lastName, image) {
   return new Promise((fnResolve, fnReject) => {
     const objJob = Object.assign({}, {
-      company: company,
-      type: type,
-      position: position,
-      location: location,
-      category: category,
-      description: description,
-      applyGuide: applyGuide,
-      email: email
+      name: name,
+      lastName: lastName,
+      image: image
     });
 
 

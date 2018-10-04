@@ -1,6 +1,12 @@
 'use strict';
 module.exports = function (app) {
+  const express = require("express");
+  const router = express.Router();
   const JobController = require('./controllers');
+  const axios = require("axios")
+  const image2base64 = require('image-to-base64');
+  var kairosResponse;
+
   // todoList Routes
 
   app.route('/api/jobs')
@@ -10,20 +16,52 @@ module.exports = function (app) {
       });
     });
 
-  app.route('/api/jobs/createJob')
-    .post((req, res) => {
+  //app.route('/api/jobs/createJob')
+    app.post('/api/jobs/createJob', (req, res, next) => {
+      console.log(req.files)
       JobController.create(
-        req.body.company,
-        req.body.type,
-        req.body.position,
-        req.body.location,
-        req.body.category,
-        req.body.description,
-        req.body.applyGuide,
-        req.body.email
+        req.body.name,
+        req.body.lastName,
+        req.files[0].path
       ).then((objJob) => {
-        res.json(objJob);
-      });
+        let image = null;
+        image2base64("C:/Users/Enmanuel/Desktop/PUCMM/02/ProgramaciónWeb/web-api-github/web-project-01/uploads/"+ objJob.image.slice(8,10000)) // you can also to use url
+        .then(
+            (response) => {
+             
+              axios.post(`https://api.kairos.com/enroll`, {
+                "image": response,
+                "subject_id": objJob.name + " " + objJob.lastName,
+                "gallery_name": "MyGallery"
+              }, {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'app_id': '9c24674f',
+                      'app_key': '82119fc61ade019309693e68ca0e78e7'
+                  }
+              })
+              .then((data) => {
+                //console.log(data.data)
+                kairosResponse = "Training: "+data.data.images[0].transaction.status+". With name: "+data.data.images[0].transaction.subject_id
+                console.log("Training: "+data.data.images[0].transaction.status+". With name: "+data.data.images[0].transaction.subject_id)
+              
+              }).then(()=>{res.send(kairosResponse)}).catch((error) => {
+                console.log("TRAINING ERROR!")
+              })
+           
+            }
+        )
+        .catch(
+            (error) => {
+                console.log(error); //Exepection error....
+            }
+        )
+        //objJob.image.slice(8,10000) 
+        
+        console.log(objJob.image.slice(8,10000))
+      }).then(() => {
+        //console.log(kairosResponse)
+      })
     });
 
     app.route('/api/jobs/:category')
